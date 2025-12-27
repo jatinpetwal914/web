@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phadizon | Essence of Himalayas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="login.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+
+     <!-- hero -->
+<section class="hero">
+    <div class="hero-content" data-aos="fade-up">
+        <a href="products.html" class="cta-btn-modern">SHOP NOW</a>
+    </div>
+</section>
+
+ <!-- wearable -->
+<section class="wearable-section">
+    <div class="section-header" data-aos="fade-down">
+        <h2>WEARABLE</h2>
+        <p>Phadi Tradition</p>
+    </div>
+    
+    <div class="wearable-scroll-container">
+        <div class="wearable-grid">
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="img-placeholder">
+                    <img src="assets/images/w1.jpg" alt="Phadi Wearable 1">
+                </div>
+            </div>
+            
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="img-placeholder">
+                    <img src="assets/images/w2.jpg" alt="Phadi Wearable 2">
+                </div>
+            </div>
+            
+            <div class="wearable-card center-card" data-aos="zoom-in">
+                <div class="img-placeholder">
+                    <img src="assets/images/w3.jpg" alt="Phadi Wearable 3">
+                </div>
+            </div>
+            
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="img-placeholder">
+                    <img src="assets/images/w4.jpg" alt="Phadi Wearable 4">
+                </div>
+            </div>
+            
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="400">
+                <div class="img-placeholder">
+                    <img src="assets/images/w5.jpg" alt="Phadi Wearable 5">
+                </div>
+            </div>
+            
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="500">
+                <div class="img-placeholder">
+                    <img src="assets/images/w6.jpg" alt="Phadi Wearable 6">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="category-card" data-aos="fade-up">
+            <h3>HOME</h3>
+            <div class="cat-img-container">
+                <img src="assets/images/flour.jpg" alt="Rasoi Ka Saman" onerror="this.src='https://placehold.co/300x300?text=Flour'">
+            </div>
+            <a href="home.html" class="cat-btn">RASOI KA SAMAN</a>
+            <p>fulfill your kitchen (Rasoi) with our safe clean and healthy product's</p>
+        </div>
+        <div class="category-card" data-aos="fade-up" data-aos-delay="100">
+            <h3>HEALTH-CARE</h3>
+            <div class="cat-img-container">
+                <img src="assets/images/tea.jpg" alt="Health Care" onerror="this.src='https://placehold.co/300x300?text=Green+Tea'">
+            </div>
+            <a href="health.html" class="cat-btn">HEALTH FREE</a>
+            <p>ENJOY every food with any limits and thinks about your health</p>
+        </div>
+        <div class="category-card" data-aos="fade-up" data-aos-delay="200">
+            <h3>CHATAR-PATAR</h3>
+            <div class="cat-img-container">
+                <img src="assets/images/snacka.jpg" alt="Snacks" onerror="this.src='https://placehold.co/300x300?text=Snacks'">
+            </div>
+            <a href="chatar-patar.html" class="cat-btn">SNACKS</a>
+            <p>Bring your healthy and tasty snacks(Chatar-Patar)</p>
+        </div>
+    </section>
+
+    <!-- Review Section -->
+    <section class="review-section">
+        <div class="review-container">
+            <div class="review-img" data-aos="fade-right">
+                <div class="img-placeholder">Review Image</div>
+            </div>
+            <div class="review-text" data-aos="fade-left">
+                <h2>TAKE A<br>REVIEW<br>OF OUR<br>WORK</h2>
+                <p>Thousands of woman's are working with us and keep & safe the beauty of Uttarakhand and connect with people's with devbhoomi</p>
+                <button class="book-btn">BOOK NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- top product -->
+<section class="top-products">
+    <h2 data-aos="fade-down">OUR TOP PRODUCTS</h2>
+    
+    <div class="top-tabs" data-aos="fade-up">
+        <button class="top-tab active" data-prod="oil">Pidantar Oil</button>
+        <button class="top-tab" data-prod="kemomile">Kemomile</button>
+        <button class="top-tab" data-prod="alsi">Alsi</button>
+    </div>
+
+    <div class="top-content-tray" data-aos="fade-up">
+        <div class="product-tray">
+            <div class="img-box"><img id="img1" src="assets/images/kemomile.jpg" onerror="this.src='https://placehold.co/300x300?text=Image1'"></div>
+            <div class="img-box"><img id="img2" src="assets/images/w2.jpg" onerror="this.src='https://placehold.co/300x300?text=Image2'"></div>
+            <div class="img-box"><img id="img3" src="assets/images/w3.jpg" onerror="this.src='https://placehold.co/300x300?text=Image3'"></div>
+        </div>
+
+        <div class="tray-description">
+            <h3 id="prodTitle">Pidantar Oil</h3>
+            <p id="prodDesc">A soothing oil crafted for relief and daily wellness.</p>
+            <p id="prodUse">Use a few drops to massage affected areas in the morning and evening.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Floating Search Button -->
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script>
+        const dataMap = {
+            oil: {
+                title: 'Pidantar Oil',
+                desc: 'A soothing oil crafted for relief and daily wellness.',
+                use: 'Use a few drops to massage affected areas in the morning and evening.',
+                images: ['images/oil.jpg', 'assets/images/w1.jpg', 'assets/images/w2.jpg']
+            },
+            kemomile: {
+                title: 'Kemomile',
+                desc: 'Herbal blend for calming routine and relaxation.',
+                use: 'Brew with hot water for 3-5 minutes and enjoy before sleep.',
+                images: ['images/chamomile.jpg', 'assets/images/kemomile.jpg', 'assets/images/w3.jpg']
+            },
+            alsi: {
+                title: 'Alsi',
+                desc: 'Nutrient-rich seeds to add fiber to your diet.',
+                use: 'Sprinkle on salads or mix into morning smoothies.',
+                images: ['assets/images/kemomile.jpg', 'assets/images/w2.jpg', 'assets/images/w3.jpg']
+            }
+        };
+        const tabs = document.querySelectorAll('.top-tab');
+        function setTopProduct(key) {
+            const d = dataMap[key];
+            if (!d) return;
+            document.getElementById('prodTitle').innerText = d.title;
+            document.getElementById('prodDesc').innerText = d.desc;
+            document.getElementById('prodUse').innerText = d.use;
+            document.getElementById('img1').src = d.images[0];
+            document.getElementById('img2').src = d.images[1];
+            document.getElementById('img3').src = d.images[2];
+        }
+        tabs.forEach(b => {
+            b.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                b.classList.add('active');
+                setTopProduct(b.getAttribute('data-prod'));
+            });
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="login.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Contact Hero -->
+    <section class="wearable-section" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+        <div class="section-header" data-aos="fade-down">
+            <h2>GET IN TOUCH</h2>
+            <p>Connect with the Phadi Tradition</p>
+        </div>
+
+        <div class="contact-container" style="display: flex; justify-content: space-around; flex-wrap: wrap; padding: 2rem; gap: 2rem;">
+            
+            <div class="contact-info" data-aos="fade-right">
+                <div class="info-item" style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                    <i class="fa-solid fa-envelope" style="font-size: 2rem; color: var(--accent-green);"></i>
+                    <div>
+                        <h4 style="margin: 0;">Email Us</h4>
+                        <p style="margin: 0;">phadizon914@gmail.com</p>
+                    </div>
+                </div>
+                <div class="info-item" style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
+                    <i class="fa-solid fa-phone" style="font-size: 2rem; color: var(--accent-green);"></i>
+                    <div>
+                        <h4 style="margin: 0;">Call Us</h4>
+                        <p style="margin: 0;">+91 9823838xxxx</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="social-links" data-aos="fade-left" style="display: flex; gap: 2rem; align-items: center;">
+                <a href="#" class="social-btn telegram"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="social-btn instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="social-btn facebook"><i class="fa-brands fa-twitter"></i></a> <!-- Using twitter icon as placeholder for generic social if needed, or facebook -->
+                <a href="#" class="social-btn facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Map Placeholder (Optional) -->
+    <!-- <section class="map-section">...</section> -->
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Floating Search Button -->
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+
+    <style>
+        .social-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            border: 2px solid white;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .social-btn:hover {
+            background: white;
+            color: var(--primary-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+</body>
+</html>

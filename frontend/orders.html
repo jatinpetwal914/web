@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .orders-section {
+            padding: 4rem 5%;
+            min-height: 70vh;
+        }
+        .order-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 5px solid var(--accent-green);
+            transition: transform 0.3s;
+        }
+        .order-card:hover {
+            transform: translateX(5px);
+        }
+        .order-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+        .order-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        .status-pending { background: #ffeaa7; color: #d35400; }
+        .status-completed { background: #55efc4; color: #00b894; }
+        .order-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="dashboard.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="section-header" style="color: var(--primary-blue); text-align: left;">
+            <h2>MY ORDERS</h2>
+            <p>Track your past purchases</p>
+        </div>
+
+        <div id="ordersList">
+            <p style="text-align: center; color: #888;">Loading orders...</p>
+        </div>
+    </section>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        async function loadOrders() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/orders`, {
+                    headers: { 'Authorization': token }
+                });
+                const data = await res.json();
+                
+                const ordersList = document.getElementById('ordersList');
+                ordersList.innerHTML = '';
+
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach((o, index) => {
+                        ordersList.innerHTML += `
+                            <div class="order-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                                <div class="order-info">
+                                    <h3>Order #${o.id}</h3>
+                                    <p>Date: ${new Date().toLocaleDateString()}</p> <!-- Mock date -->
+                                    <span class="order-status status-${o.status.toLowerCase() || 'pending'}">${o.status || 'Pending'}</span>
+                                </div>
+                                <div class="order-total">
+                                    ₹${o.total}
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    ordersList.innerHTML = '<p style="text-align: center;">You have no orders yet.</p>';
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('ordersList').innerHTML = '<p style="text-align: center;">No orders found.</p>';
+            }
+        }
+
+        loadOrders();
+    </script>
+</body>
+</html>

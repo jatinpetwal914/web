@@ -1,0 +1,21 @@
+body{
+  background:#0b0f3c;
+  color:white;
+  font-family:Poppins;
+}
+
+.login-box{
+  width:300px;
+  margin:150px auto;
+  padding:30px;
+  background:#1b1f5c;
+  border-radius:15px;
+}
+
+button{
+  background:#f4c430;
+  border:none;
+  padding:10px;
+  border-radius:20px;
+  cursor:pointer;
+}

@@ -1,0 +1,54 @@
+#ai-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#4caf50;
+  border:none;
+  border-radius:50%;
+  padding:16px;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+#ai-chat{
+  position:fixed;
+  bottom:80px;
+  right:20px;
+  width:300px;
+  height:400px;
+  background:#1b1f5c;
+  border-radius:15px;
+  display:none;
+  flex-direction:column;
+}
+
+#ai-header{
+  padding:10px;
+  background:#f4c430;
+  color:black;
+  text-align:center;
+  font-weight:bold;
+}
+
+#ai-messages{
+  flex:1;
+  padding:10px;
+  overflow-y:auto;
+}
+
+#ai-input{
+  display:flex;
+}
+
+#ai-input input{
+  flex:1;
+  border:none;
+  padding:10px;
+}
+
+#ai-input button{
+  background:#4caf50;
+  border:none;
+  padding:10px;
+}

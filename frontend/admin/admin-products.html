@@ -1,0 +1,19 @@
+<h2>Add Product</h2>
+<input id="name" placeholder="Product Name">
+<input id="price" placeholder="Price">
+<input id="image" placeholder="Image Path">
+<button onclick="addProduct()">Add</button>
+
+<script>
+function addProduct(){
+  fetch("http://localhost:5000/api/admin/add-product",{
+    method:"POST",
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      name:name.value,
+      price:price.value,
+      image:image.value
+    })
+  }).then(()=>alert("Product Added"));
+}
+</script>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .dashboard-container {
+            padding: 4rem 5%;
+            display: flex;
+            gap: 2rem;
+            min-height: 80vh;
+        }
+        .sidebar {
+            flex: 1;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        .sidebar h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--accent-green);
+            padding-bottom: 0.5rem;
+        }
+        .sidebar ul {
+            list-style: none;
+        }
+        .sidebar li {
+            margin-bottom: 1rem;
+        }
+        .sidebar a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            color: var(--accent-green);
+        }
+        .main-content {
+            flex: 3;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .welcome-card {
+            background: linear-gradient(135deg, var(--primary-blue), #2a2c6b);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .order-history {
+            margin-top: 2rem;
+        }
+        .order-item {
+            border: 1px solid #eee;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="#" onclick="logout()"><i class="fa-solid fa-sign-out-alt"></i></a>
+        </div>
+    </nav>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-container">
+        <aside class="sidebar" data-aos="fade-right">
+            <h3>My Account</h3>
+            <ul>
+                <li><a href="#" class="active"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fa-solid fa-box"></i> Orders</a></li>
+                <li><a href="#"><i class="fa-solid fa-location-dot"></i> Addresses</a></li>
+                <li><a href="#"><i class="fa-solid fa-user"></i> Account Details</a></li>
+                <li><a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content" data-aos="fade-left">
+            <div class="welcome-card">
+                <h2 id="userName">Hello, User!</h2>
+                <p>Welcome to your Phadizon dashboard.</p>
+            </div>
+
+            <div class="order-history">
+                <h3>Recent Orders</h3>
+                <div id="ordersList">
+                    <p style="color: #888;">No recent orders found.</p>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Floating Search Button -->
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+    <script>
+        // Check auth
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        // Mock User Data
+        // In real app, fetch from /api/user/profile
+        document.getElementById('userName').innerText = "Hello, Pahadi Lover!";
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

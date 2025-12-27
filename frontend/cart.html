@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .cart-container {
+            padding: 4rem 5%;
+            min-height: 60vh;
+        }
+        .cart-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease-out;
+        }
+        .cart-item h3 { color: var(--primary-blue); margin-bottom: 0.5rem; }
+        .cart-item p { color: var(--accent-green); font-weight: bold; }
+        .remove-btn {
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .remove-btn:hover { background: #ff6b81; }
+        .cart-summary {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: right;
+            margin-top: 2rem;
+        }
+        .checkout-btn {
+            background: var(--accent-green);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+        .checkout-btn:hover { transform: scale(1.05); }
+    </style>
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html" class="active">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="login.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-container">
+        <div class="section-header" style="color: var(--primary-blue); text-align: left;">
+            <h2>YOUR CART</h2>
+        </div>
+
+        <div id="cartItems">
+            <!-- Cart items will be loaded here -->
+            <p style="text-align: center; color: #888;">Loading cart...</p>
+        </div>
+
+        <div id="cartSummary" class="cart-summary" style="display: none;">
+            <h3>Total: <span id="cartTotal">₹0</span></h3>
+            <button onclick="placeOrder()" class="checkout-btn">Place Order</button>
+        </div>
+    </section>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Floating Search Button -->
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        async function loadCart() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                document.getElementById('cartItems').innerHTML = '<p style="text-align: center;">Please <a href="login.html">login</a> to view your cart.</p>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/cart`, {
+                    headers: { 'Authorization': token } // Backend needs to verify token, for now just passing it
+                });
+                // Mocking response for now as backend auth middleware might not be fully wired in previous turn
+                // Assuming the backend returns an array of items
+                // If backend is not ready, we will show empty or mock
+                
+                // For demonstration, let's assume we get data or handle error
+                const data = await res.json();
+                
+                const cartContainer = document.getElementById('cartItems');
+                const cartSummary = document.getElementById('cartSummary');
+                
+                if (Array.isArray(data) && data.length > 0) {
+                    cartContainer.innerHTML = '';
+                    let total = 0;
+                    data.forEach(item => {
+                        total += (item.price * item.quantity);
+                        cartContainer.innerHTML += `
+                            <div class="cart-item">
+                                <div>
+                                    <h3>${item.name}</h3>
+                                    <p>Quantity: ${item.quantity}</p>
+                                </div>
+                                <div style="text-align: right;">
+                                    <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
+                                    <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('cartTotal').innerText = '₹' + total;
+                    cartSummary.style.display = 'block';
+                } else {
+                    cartContainer.innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
+                    cartSummary.style.display = 'none';
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('cartItems').innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
+            }
+        }
+
+        async function removeItem(id) {
+            // Implement remove logic
+            alert('Remove functionality coming soon');
+        }
+
+        async function placeOrder() {
+             window.location.href = 'payment.html';
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>

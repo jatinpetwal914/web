@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html" class="active">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="login.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+
+    <!-- Content Section -->
+    <section class="wearable-section">
+        <div class="section-header" data-aos="fade-down">
+            <h2>OUR STORIES</h2>
+            <p>Tales from the Himalayas</p>
+        </div>
+
+        <div class="wearable-grid">
+            <div class="wearable-card" data-aos="zoom-in">
+                <div class="img-placeholder" style="background-image: none; background-color: #f0f0f0; padding: 20px; text-align: center;">
+                    <h3>Traditional Weaving</h3>
+                    <p style="font-size: 0.8rem; color: #555;">Discover how our women artisans weave magic with wool.</p>
+                </div>
+            </div>
+            <div class="wearable-card center-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="img-placeholder" style="background-image: none; background-color: #fff; padding: 20px; text-align: center;">
+                    <h3>Organic Farming</h3>
+                    <p style="font-size: 0.8rem; color: #555;">Pure, chemical-free farming practices from the hills.</p>
+                </div>
+            </div>
+            <div class="wearable-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="img-placeholder" style="background-image: none; background-color: #f0f0f0; padding: 20px; text-align: center;">
+                    <h3>Pahadi Recipes</h3>
+                    <p style="font-size: 0.8rem; color: #555;">Authentic recipes passed down through generations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button id="ai-btn" title="AI Assistant">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Floating Search Button -->
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+
+    <!-- Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+</body>
+</html>

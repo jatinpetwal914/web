@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health | Phadizon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div id="loaderOverlay" class="loader-overlay">
+        <div class="loader-figure">
+            <svg viewBox="0 0 200 200">
+                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
+                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
+                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
+                <g class="loader-woman" fill="#ffffff">
+                    <circle cx="90" cy="70" r="10"/>
+                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
+                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
+                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <span class="logo-symbol">◇</span> 
+                Phadiz<span class="leaf-dot">o</span>n
+            </a>
+        </div>
+        <div class="nav-search">
+            <input type="text" id="navSearchInput" placeholder="Search products...">
+            <button id="navSearchBtn"><i class="fa-solid fa-search"></i></button>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="content.html">Content</a></li>
+        </ul>
+        <div class="user-icon">
+            <a href="login.html"><i class="fa-regular fa-user"></i></a>
+        </div>
+    </nav>
+    <section class="grid-20">
+        <div class="section-header" style="color: var(--primary-blue); text-align: center;">
+            <h2>Health Care</h2>
+            <p>Daily wellness picks</p>
+        </div>
+        <div class="grid">
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p1"></div><div class="name">p1</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p2"></div><div class="name">p2</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p3"></div><div class="name">p3</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p4"></div><div class="name">p4</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p5"></div><div class="name">p5</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p6"></div><div class="name">p6</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p7"></div><div class="name">p7</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p8"></div><div class="name">p8</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p9"></div><div class="name">p9</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p10"></div><div class="name">p10</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p11"></div><div class="name">p11</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p12"></div><div class="name">p12</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p13"></div><div class="name">p13</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p14"></div><div class="name">p14</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p15"></div><div class="name">p15</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p16"></div><div class="name">p16</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p17"></div><div class="name">p17</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p18"></div><div class="name">p18</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p19"></div><div class="name">p19</div></div>
+            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p20"></div><div class="name">p20</div></div>
+        </div>
+    </section>
+    <div class="floating-search">
+        <button id="side-search-btn" onclick="openSearch()" title="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+    <div id="searchOverlay" class="search-overlay">
+        <button class="search-close" onclick="closeSearch()">&times;</button>
+        <div class="search-overlay-content">
+            <input type="text" id="overlaySearchInput" placeholder="Type to search...">
+        </div>
+    </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init();</script>
+    <script src="js/main.js"></script>
+    <script src="js/ai.js"></script>
+</body>
+</html>
