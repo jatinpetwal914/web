@@ -24,7 +24,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             animation: fadeIn 0.5s ease-out;
         }
-        .cart-item h3 { color: var(--primary-blue); margin-bottom: 0.5rem; }
+        .cart-item h3 { color: var(--primary); margin-bottom: 0.5rem; }
         .cart-item p { color: var(--accent-green); font-weight: bold; }
         .remove-btn {
             background: #ff4757;
@@ -37,7 +37,7 @@
         }
         .remove-btn:hover { background: #ff6b81; }
         .cart-summary {
-            background: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary), rgba(155,191,55,0.14));
             color: white;
             padding: 2rem;
             border-radius: 10px;
@@ -102,7 +102,7 @@
 
     <!-- Cart Section -->
     <section class="cart-container">
-        <div class="section-header" style="color: var(--primary-blue); text-align: left;">
+        <div class="section-header" style="color: var(--primary); text-align: left;">
             <h2>YOUR CART</h2>
         </div>
 
@@ -148,9 +148,13 @@
         const API_BASE = 'http://localhost:5000/api';
 
         async function loadCart() {
-            const token = localStorage.getItem('token');
+
+
+const token = localStorage.getItem('token');
+            // If no auth token, fall back to localStorage-based cart for guest users
             if (!token) {
-                document.getElementById('cartItems').innerHTML = '<p style="text-align: center;">Please <a href="login.html">login</a> to view your cart.</p>';
+                const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
+                renderCartFromLocal(localCart);
                 return;
             }
 
@@ -198,16 +202,111 @@
             }
         }
 
+        function renderCartFromLocal(localCart) {
+            const cartContainer = document.getElementById('cartItems');
+            const cartSummary = document.getElementById('cartSummary');
+            if (Array.isArray(localCart) && localCart.length > 0) {
+                cartContainer.innerHTML = '';
+                let total = 0;
+                localCart.forEach(item => {
+                    total += (item.price * item.quantity);
+                    cartContainer.innerHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <h3>${item.name}</h3>
+                                <p>Quantity: ${item.quantity}</p>
+                            </div>
+                            <div style="text-align: right;">
+                                <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
+                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('cartTotal').innerText = '₹' + total;
+                cartSummary.style.display = 'block';
+            } else {
+                cartContainer.innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
+                cartSummary.style.display = 'none';
+            }
+        }
+
         async function removeItem(id) {
-            // Implement remove logic
-            alert('Remove functionality coming soon');
+            const token = localStorage.getItem('token');
+            if (!token) {
+                // remove from localStorage cart
+                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart = cart.filter(i => i.id !== id);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                renderCartFromLocal(cart);
+                // update badge if main.js helper exists
+                if (typeof updateCartBadge === 'function') updateCartBadge();
+                return;
+            }
+            try {
+                const res = await fetch(`${API_BASE}/cart/${id}`, { method: 'DELETE', headers: { Authorization: token } });
+                if (res.ok) {
+                    await loadCart();
+                    if (typeof updateCartBadge === 'function') updateCartBadge();
+                } else {
+                    alert('Could not remove item');
+                }
+            } catch (e) { console.error(e); alert('Could not remove item'); }
         }
 
         async function placeOrder() {
-             window.location.href = 'payment.html';
+            const token = localStorage.getItem('token');
+            if (!token) { alert('Please login to place order'); window.location.href = 'login.html'; return; }
+            try {
+                const res = await fetch(`${API_BASE}/orders/place`, { method: 'POST', headers: { Authorization: token } });
+                if (res.ok) {
+                    const data = await res.json();
+                    alert('Order placed. Total: ₹' + (data.total || '0'));
+                    window.location.href = 'orders.html';
+                } else {
+                    alert('Could not place order');
+                }
+            } catch (e) { console.error(e); alert('Could not place order'); }
         }
 
         loadCart();
     </script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i><span class="sr-only">YouTube</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 </body>
 </html>

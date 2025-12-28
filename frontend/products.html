@@ -17,12 +17,13 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: transform var(--transition), box-shadow var(--transition);
             text-align: center;
             padding-bottom: 1rem;
         }
         .product-card-full:hover {
             transform: translateY(-10px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.12);
         }
         .prod-img-full {
             height: 250px;
@@ -35,7 +36,7 @@
         .prod-img-full img {
             max-width: 100%;
             max-height: 100%;
-            transition: transform 0.5s;
+            transition: transform var(--transition-slow) cubic-bezier(.2,.9,.2,1);
         }
         .product-card-full:hover .prod-img-full img {
             transform: scale(1.1);
@@ -44,7 +45,7 @@
             padding: 1rem;
         }
         .product-info h3 {
-            color: var(--primary-blue);
+            color: var(--primary);
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
         }
@@ -55,7 +56,7 @@
             margin-bottom: 1rem;
         }
         .add-btn {
-            background: var(--primary-blue);
+            background: var(--primary);
             color: white;
             padding: 10px 20px;
             border: none;
@@ -113,7 +114,7 @@
 
     <!-- Products Section -->
     <section class="products-section">
-        <div class="section-header" style="color: var(--primary-blue); text-align: center;">
+        <div class="section-header" style="color: var(--primary); text-align: center;">
             <h2>ALL PRODUCTS</h2>
             <p>Authentic Items from the Hills</p>
         </div>
@@ -156,6 +157,7 @@
         let allProducts = [];
 
         async function loadProducts() {
+
             try {
                 const res = await fetch(`${API_BASE}/products`);
                 const data = await res.json();
@@ -166,6 +168,8 @@
                     // Use fallback data if API returns empty
                     allProducts = getFallbackData();
                 }
+                // expose for other scripts (hero quick-add, main.js helpers)
+                window.allProducts = allProducts;
             } catch (error) {
                 console.error(error);
                 allProducts = getFallbackData();
@@ -187,12 +191,17 @@
 
         function getFallbackData() {
             return [
-                { id: 1, name: "Chakkidari Flour", price: 450, image: "images/flour.jpg" },
-                { id: 2, name: "Green Tea", price: 350, image: "images/tea.jpg" },
-                { id: 3, name: "Pidantar Oil", price: 500, image: "images/oil.jpg" },
-                { id: 4, name: "Kemomile", price: 300, image: "images/chamomile.jpg" },
-                { id: 5, name: "Alsi", price: 200, image: "images/alsi.jpg" },
-                { id: 6, name: "Rosemarie", price: 400, image: "images/rosemary.jpg" }
+                { id: 1, name: "Chakkidari Flour", price: 450, image: "assets/images/flour.jpg" },
+                { id: 2, name: "Green Tea", price: 350, image: "assets/images/tea.jpg" },
+                { id: 3, name: "Pidantar Oil", price: 500, image: "assets/images/oil.jpg" },
+                { id: 4, name: "Kemomile", price: 300, image: "assets/images/kemomile.jpg" },
+                { id: 5, name: "Alsi", price: 200, image: "assets/images/alsi.jpg" },
+                { id: 6, name: "Rosemarie", price: 400, image: "assets/images/rosemary.jpg" },
+                { id: 7, name: "Mango Pickle", price: 165, image: "assets/images/mango-pickel.png" },
+                { id: 8, name: "Pahadi Salt (Namak)", price: 90, image: "assets/images/pahadi-salt.png" },
+                { id: 9, name: "Wild Honey", price: 420, image: "assets/images/honey.png" },
+                { id: 10, name: "Haldi (Turmeric) Soap", price: 120, image: "assets/images/haldi-soap.png" },
+                { id: 11, name: "Alovera Soap", price: 140, image: "assets/images/alovera-soap.png" }
             ];
         }
 
@@ -203,7 +212,7 @@
             if (products.length > 0) {
                 products.forEach((p, index) => {
                     productList.innerHTML += `
-                        <div class="product-card-full" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="product-card-full" data-aos="fade-up" data-aos-delay="${index * 100}" data-product-id="${p.id}" data-product-name="${p.name}" data-product-price="${p.price}" data-product-image="${p.image}">
                             <div class="prod-img-full">
                                 <img src="${p.image || 'https://placehold.co/300x300?text=Product'}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300?text=${encodeURIComponent(p.name)}'">
                             </div>
@@ -231,19 +240,53 @@
             if (header) header.innerText = `Search Results for "${query}"`;
         }
 
-        async function addToCart(id) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('Please login to add items to cart');
-                window.location.href = 'login.html';
+        function addToCart(id) {
+            // Prefer the site-wide addToCart (localStorage-aware) if available
+            if (typeof window.addToCart === 'function') {
+                window.addToCart(id);
                 return;
             }
-            // Mock API call
-            alert('Item added to cart!');
-            // Implement actual API call here
+            alert('Item added to cart! (demo)');
         }
 
         loadProducts();
     </script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i><span class="sr-only">YouTube</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 </body>
 </html>

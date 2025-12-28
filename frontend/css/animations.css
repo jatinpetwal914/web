@@ -3,12 +3,16 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Background Animation for Hero */
+/* Background Animation for Hero (subtle lateral pan) */
 @keyframes bg-pan {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% { background-position: 50% 30%; }
+    25% { background-position: 48% 34%; }
+    50% { background-position: 52% 36%; }
+    75% { background-position: 50% 34%; }
+    100% { background-position: 50% 30%; }
 }
+
+/* Gentle zoom removed - use subtle pan only to preserve image aspect ratio */
 
 .hero {
     /* Overlay gradient for depth */
@@ -23,7 +27,8 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(27, 31, 92, 0.4), rgba(125, 150, 72, 0.2));
+    /* green -> warm gold overlay for improved contrast on bright areas */
+    background: linear-gradient(45deg, rgba(39,80,50,0.46), rgba(240,200,89,0.12));
     z-index: 1;
     pointer-events: none;
 }

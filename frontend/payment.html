@@ -27,7 +27,7 @@
             animation: fadeIn 0.5s ease-out;
         }
         .payment-card h2 {
-            color: var(--primary-blue);
+            color: var(--primary);
             margin-bottom: 1.5rem;
         }
         .payment-amount {
@@ -37,7 +37,7 @@
             margin: 1.5rem 0;
         }
         .pay-btn {
-            background: var(--primary-blue);
+            background: var(--primary);
             color: white;
             padding: 15px 40px;
             border: none;
@@ -215,5 +215,42 @@
             }
         }
     </script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i><span class="sr-only">YouTube</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 </body>
 </html>

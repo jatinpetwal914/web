@@ -77,11 +77,11 @@
                 </div>
             </div>
 
-            <div class="social-links" data-aos="fade-left" style="display: flex; gap: 2rem; align-items: center;">
-                <a href="#" class="social-btn telegram"><i class="fa-brands fa-telegram"></i></a>
-                <a href="#" class="social-btn instagram"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" class="social-btn facebook"><i class="fa-brands fa-twitter"></i></a> <!-- Using twitter icon as placeholder for generic social if needed, or facebook -->
-                <a href="#" class="social-btn facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <div class="social-links" data-aos="fade-left" style="display: flex; gap: 1rem; align-items: center;">
+                <a href="https://www.facebook.com/profile.php?id=61585513685094" class="social-btn facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/phadizon/" class="social-btn instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@phadizon" class="social-btn youtube" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.linkedin.com/in/phadizon-0608983a2/" class="social-btn linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
 
         </div>
@@ -129,7 +129,7 @@
         }
         .social-btn:hover {
             background: white;
-            color: var(--primary-blue);
+            color: var(--primary);
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
@@ -145,5 +145,41 @@
     </script>
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 </body>
 </html>

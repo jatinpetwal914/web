@@ -51,9 +51,18 @@
     </nav>
 
      <!-- hero -->
-<section class="hero">
+<section class="hero" aria-label="Hero section">
+    <!-- Background image used by CSS: copy your file to `assets/images/chatgpt-hero.png` -->
     <div class="hero-content" data-aos="fade-up">
-        <a href="products.html" class="cta-btn-modern">SHOP NOW</a>
+        <h1 class="hero-quote">Bringing goodness of the Himalayas to you</h1>
+        <p class="hero-subtext">Authentic, sustainable, and handcrafted products from our mountain communities.</p>
+        <div class="hero-actions">
+            <a href="products.html" class="cta-btn-modern">Shop Now</a>
+        </div>
+        <!-- Placeholder for future small product thumbnails inside hero (hidden by default) -->
+        <div class="hero-features" aria-hidden="true"></div>
+        <!-- New product: Alovera Soap added to shop (id: 11) -->
+        <!-- Image stored at assets/images/alovera-soap.png -->
     </div>
 </section>
 
@@ -137,12 +146,14 @@
     <section class="review-section">
         <div class="review-container">
             <div class="review-img" data-aos="fade-right">
-                <div class="img-placeholder">Review Image</div>
+                <div class="img-placeholder">
+                    <img src="assets/images/Handmade_Phadi_Production_d7b6d4d4-528d-453e-b87d-bda6859674bb.jpg" alt="Review / Testimonial">
+                </div>
             </div>
             <div class="review-text" data-aos="fade-left">
                 <h2>TAKE A<br>REVIEW<br>OF OUR<br>WORK</h2>
-                <p>Thousands of woman's are working with us and keep & safe the beauty of Uttarakhand and connect with people's with devbhoomi</p>
-                <button class="book-btn">BOOK NOW</button>
+                <p>Thousands of women collaborate with us — preserving the beauty of Uttarakhand while connecting mountain communities with customers across the country.</p>
+                <a href="contact.html" class="book-btn">BOOK NOW</a>
             </div>
         </div>
     </section>
@@ -158,11 +169,23 @@
     </div>
 
     <div class="top-content-tray" data-aos="fade-up">
-        <div class="product-tray">
-            <div class="img-box"><img id="img1" src="assets/images/kemomile.jpg" onerror="this.src='https://placehold.co/300x300?text=Image1'"></div>
-            <div class="img-box"><img id="img2" src="assets/images/w2.jpg" onerror="this.src='https://placehold.co/300x300?text=Image2'"></div>
-            <div class="img-box"><img id="img3" src="assets/images/w3.jpg" onerror="this.src='https://placehold.co/300x300?text=Image3'"></div>
-        </div>
+        <style>
+        /* Sliding window carousel: show multiple items and auto-slide */
+        .top-carousel { position: relative; overflow:hidden; padding:0.5rem 0; }
+        .carousel-track { display:flex; gap:1rem; transition:transform 600ms cubic-bezier(.22,.9,.22,1); will-change:transform; }
+        .carousel-item { flex: 0 0 calc(33.333% - 0.66rem); background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.06); text-decoration:none; color:inherit; }
+        .carousel-item img { width:100%; height:220px; object-fit:cover; display:block; }
+        .carousel-item .caption { padding:0.8rem; font-weight:600; color:var(--primary); }
+        .carousel-item .price { color:var(--accent-green); font-weight:bold; margin-top:0.25rem; }
+        @media (max-width:1100px){ .carousel-item { flex: 0 0 calc(50% - 0.5rem); } }
+        @media (max-width:640px){ .carousel-item { flex: 0 0 calc(100% - 0.5rem); } }
+        </style>
+
+        <div class="top-carousel" id="topCarousel">
+            <div class="carousel-track" id="carouselTrack" aria-live="polite">
+                <!-- items will be injected here -->
+            </div>
+        </div> 
 
         <div class="tray-description">
             <h3 id="prodTitle">Pidantar Oil</h3>
@@ -208,13 +231,13 @@
                 title: 'Pidantar Oil',
                 desc: 'A soothing oil crafted for relief and daily wellness.',
                 use: 'Use a few drops to massage affected areas in the morning and evening.',
-                images: ['images/oil.jpg', 'assets/images/w1.jpg', 'assets/images/w2.jpg']
+                images: ['assets/images/oil.jpg', 'assets/images/w1.jpg', 'assets/images/w2.jpg']
             },
             kemomile: {
                 title: 'Kemomile',
                 desc: 'Herbal blend for calming routine and relaxation.',
                 use: 'Brew with hot water for 3-5 minutes and enjoy before sleep.',
-                images: ['images/chamomile.jpg', 'assets/images/kemomile.jpg', 'assets/images/w3.jpg']
+                images: ['assets/images/kemomile.jpg', 'assets/images/kemomile.jpg', 'assets/images/w3.jpg']
             },
             alsi: {
                 title: 'Alsi',
@@ -227,12 +250,12 @@
         function setTopProduct(key) {
             const d = dataMap[key];
             if (!d) return;
-            document.getElementById('prodTitle').innerText = d.title;
-            document.getElementById('prodDesc').innerText = d.desc;
-            document.getElementById('prodUse').innerText = d.use;
-            document.getElementById('img1').src = d.images[0];
-            document.getElementById('img2').src = d.images[1];
-            document.getElementById('img3').src = d.images[2];
+            const prodTitle = document.getElementById('prodTitle'); if (prodTitle) prodTitle.innerText = d.title;
+            const prodDesc = document.getElementById('prodDesc'); if (prodDesc) prodDesc.innerText = d.desc;
+            const prodUse = document.getElementById('prodUse'); if (prodUse) prodUse.innerText = d.use;
+            const i1 = document.getElementById('img1'); if (i1) i1.src = d.images[0];
+            const i2 = document.getElementById('img2'); if (i2) i2.src = d.images[1];
+            const i3 = document.getElementById('img3'); if (i3) i3.src = d.images[2];
         }
         tabs.forEach(b => {
             b.addEventListener('click', () => {
@@ -242,8 +265,139 @@
             });
         });
     </script>
+    <script>
+    (function(){
+      const fallback = [
+        { id: 1, name: "Chakkidari Flour", price: 450, image: "assets/images/flour.jpg", desc: "Fine mountain flour", use: "Use for rotis and baking." },
+        { id: 2, name: "Green Tea", price: 350, image: "assets/images/tea.jpg", desc: "Refreshing green tea", use: "Steep 2-3 mins." },
+        { id: 3, name: "Pidantar Oil", price: 500, image: "assets/images/oil.jpg", desc: "A soothing oil crafted for relief and daily wellness.", use: "Use a few drops to massage affected areas." },
+        { id: 4, name: "Kemomile", price: 300, image: "assets/images/kemomile.jpg", desc: "Herbal blend for calming routine and relaxation.", use: "Brew with hot water for 3-5 minutes." },
+        { id: 5, name: "Alsi", price: 200, image: "assets/images/alsi.jpg", desc: "Nutrient-rich seeds to add fiber to your diet.", use: "Sprinkle on salads or mix into smoothies." },
+        { id: 7, name: "Mango Pickle", price: 165, image: "assets/images/mango-pickel.png", desc: "Tangy mango pickle", use: "Enjoy with meals." },
+        { id: 8, name: "Pahadi Salt (Namak)", price: 90, image: "assets/images/pahadi-salt.png", desc: "Natural mountain salt", use: "Use as regular salt." },
+        { id: 9, name: "Wild Honey", price: 420, image: "assets/images/honey.png", desc: "Raw wild honey", use: "Use in tea or on toast." },
+        { id: 10, name: "Haldi Soap", price: 120, image: "assets/images/haldi-soap.png", desc: "Turmeric soap", use: "Use for gentle cleansing." },
+        { id: 11, name: "Alovera Soap", price: 140, image: "assets/images/alovera-soap.png", desc: "Aloe vera soap", use: "Use for soothing skin." }
+      ];
+
+      function byId(id){ return fallback.find(p => p.id == id) || null; }
+
+      function pickCarouselProducts(){
+        // 1) Try popular products (stored as array of ids in localStorage 'popularProducts')
+        try {
+          const popular = JSON.parse(localStorage.getItem('popularProducts') || 'null');
+          if (Array.isArray(popular) && popular.length){
+            const mapped = popular.map(byId).filter(Boolean);
+            if (mapped.length) return mapped;
+          }
+        } catch(e){ /* ignore */ }
+
+        // 2) Try cart -> use top quantities
+        try {
+          const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+          if (Array.isArray(cart) && cart.length){
+            const sorted = cart.slice().sort((a,b)=> (b.quantity||0)-(a.quantity||0));
+            return sorted.map(c => ({ id: c.id, name: c.name, price: c.price || 0, image: c.image || 'https://placehold.co/600x320?text=Product', desc: c.desc || '', use: c.use || '' }));
+          }
+        } catch(e){}
+
+        // 3) Fallback: random products from list
+        const shuffled = fallback.slice().sort(()=>0.5 - Math.random());
+        return shuffled.slice(0, 3);
+      }
+
+      function initTopCarousel(){
+        const prods = pickCarouselProducts();
+        if (!prods || prods.length === 0) return;
+        const track = document.getElementById('carouselTrack');
+        track.innerHTML = '';
+
+        // ensure at least some items to show
+        let items = prods.slice();
+        // duplicate if fewer than 4 so sliding feels continuous
+        while (items.length < 4) items = items.concat(items.slice());
+        items = items.slice(0, Math.max(items.length, 4));
+
+        items.forEach((p)=>{
+          const a = document.createElement('a');
+          a.className = 'carousel-item';
+          a.href = 'products.html?product=' + (p.id || '');
+          a.innerHTML = `<img src="${p.image || 'https://placehold.co/600x320?text=Product'}" alt="${p.name}" onerror="this.onerror=null;this.src='https://placehold.co/600x320?text=Product';"><div class="caption">${p.name}<div class="price">₹${p.price||''}</div></div>`;
+          a.addEventListener('click', (e)=>{ /* allow normal navigation */ });
+          track.appendChild(a);
+        });
+
+        let idx = 0;
+        const visible = () => {
+          if (window.innerWidth > 1100) return 3;
+          if (window.innerWidth > 640) return 2;
+          return 1;
+        };
+
+        function slideTo(i){
+          const item = track.querySelector('.carousel-item');
+          if (!item) return;
+          const w = item.offsetWidth + parseFloat(getComputedStyle(track).gap || 0);
+          track.style.transform = `translateX(-${i * w}px)`;
+        }
+
+        let timer = setInterval(()=>{
+          const vis = visible();
+          idx = (idx + 1) % Math.max(1, items.length - vis + 1);
+          slideTo(idx);
+        }, 5000);
+
+        const carousel = document.getElementById('topCarousel');
+        if (carousel){
+          carousel.addEventListener('mouseenter', ()=> clearInterval(timer));
+          carousel.addEventListener('mouseleave', ()=> timer = setInterval(()=>{ const vis = visible(); idx = (idx + 1) % Math.max(1, items.length - vis + 1); slideTo(idx); }, 5000));
+        }
+
+        window.addEventListener('resize', ()=>{ slideTo(idx); });
+      }
+
+      document.addEventListener('DOMContentLoaded', initTopCarousel);
+    })();
+    </script>
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i><span class="sr-only">YouTube</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 
 </body>
 </html>

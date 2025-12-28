@@ -47,31 +47,15 @@
         </div>
     </nav>
     <section class="grid-20">
-        <div class="section-header" style="color: var(--primary-blue); text-align: center;">
+        <div class="section-header" style="color: var(--primary); text-align: center;">
             <h2>Home Essentials</h2>
             <p>Rasoi Ka Saman</p>
         </div>
         <div class="grid">
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p1"></div><div class="name">p1</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p2"></div><div class="name">p2</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p3"></div><div class="name">p3</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p4"></div><div class="name">p4</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p5"></div><div class="name">p5</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p6"></div><div class="name">p6</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p7"></div><div class="name">p7</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p8"></div><div class="name">p8</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p9"></div><div class="name">p9</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p10"></div><div class="name">p10</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p11"></div><div class="name">p11</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p12"></div><div class="name">p12</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p13"></div><div class="name">p13</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p14"></div><div class="name">p14</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p15"></div><div class="name">p15</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p16"></div><div class="name">p16</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p17"></div><div class="name">p17</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p18"></div><div class="name">p18</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p19"></div><div class="name">p19</div></div>
-            <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p20"></div><div class="name">p20</div></div>
+            <div class="home-shop-cta" style="text-align:center; padding:3rem 0; grid-column: 1 / -1;">
+                <p style="color:var(--muted); margin-bottom: 1rem;">All of our products have moved to the Shop — you can browse everything there.</p>
+                <a href="products.html" class="cta-btn-modern" style="padding:14px 40px; font-size:1.1rem;">Shop Now</a>
+            </div>
         </div>
     </section>
     <div class="floating-search">
@@ -89,5 +73,42 @@
     <script>AOS.init();</script>
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+
+    <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+        <div class="footer-inner">
+            <div class="footer-about">
+                <a href="index.html" class="logo-link"><span class="logo-symbol">◇</span> Phadizon</a>
+                <p>Bringing the goodness of the Himalayas — handcrafted, sustainable, and authentic products from mountain communities.</p>
+                <div class="social" aria-label="social links">
+                    <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook"></i><span class="sr-only">Facebook</span></a>
+                    <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i><span class="sr-only">Instagram</span></a>
+                    <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i><span class="sr-only">YouTube</span></a>
+                    <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i><span class="sr-only">LinkedIn</span></a>
+                </div>
+            </div>
+            <div class="footer-links" aria-label="Footer links">
+                <h4>Quick Links</h4>
+                <a href="content.html">Terms</a>
+                <a href="content.html#credits">Credits</a>
+                <a href="admin/admin-login.html">Admin</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-newsletter" aria-label="Newsletter signup">
+                <h4>Join our newsletter</h4>
+                <form id="footerNewsletter" action="#" onsubmit="event.preventDefault(); alert('Thanks! (Demo)');">
+                    <label for="footerEmail" class="sr-only">Email</label>
+                    <div class="newsletter-input">
+                        <input id="footerEmail" type="email" placeholder="Your email address" required>
+                        <button type="submit" class="cta-btn-modern">Subscribe</button>
+                    </div>
+                </form>
+                <small class="newsletter-note">We’ll send occasional updates about new products and offers.</small>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="credits">© Phadizon <span id="ph-year"></span></div>
+        </div>
+    </footer>
+    <script>document.getElementById('ph-year')?.appendChild(document.createTextNode(new Date().getFullYear()));</script>
 </body>
 </html>
