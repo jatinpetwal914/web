@@ -7,23 +7,27 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <style>
+      /* Footer styles (right-aligned on desktop, centered on mobile) */
+      .site-footer{background:#111;color:#fff;padding:32px 20px;font-family:inherit}
+      .site-footer a{color:#fff;text-decoration:none}
+      .site-footer .footer-container{display:flex;gap:24px;flex-wrap:wrap;max-width:1100px;margin:0 auto;align-items:flex-start;justify-content:flex-end}
+      .site-footer .footer-brand{margin-right:24px;text-align:right}
+      .site-footer .footer-brand p{margin:6px 0 0}
+      .site-footer .footer-links{min-width:160px;text-align:right}
+      .site-footer .footer-links ul{list-style:none;padding:0;margin:0}
+      .site-footer .footer-links li{margin:6px 0}
+      .site-footer .footer-links h4,.site-footer .footer-social h4{margin:0 0 8px;font-size:16px}
+      .site-footer .footer-social a{margin-left:12px;font-size:18px;color:#e9e9e9}
+      .footer-bottom{text-align:right;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);margin-top:18px;font-size:14px}
+      @media(max-width:700px){
+        .site-footer .footer-container{flex-direction:column;align-items:center;text-align:center;justify-content:center}
+        .site-footer .footer-brand,.site-footer .footer-links,.site-footer .footer-social{text-align:center}
+        .footer-bottom{text-align:center}
+      }
+    </style>
 </head>
 <body>
-    <div id="loaderOverlay" class="loader-overlay">
-        <div class="loader-figure">
-            <svg viewBox="0 0 200 200">
-                <ellipse class="loader-grass" cx="100" cy="150" rx="60" ry="18" fill="#7d9648"/>
-                <rect class="loader-grass" x="70" y="100" width="8" height="40" fill="#7d9648"/>
-                <rect class="loader-grass" x="120" y="100" width="8" height="40" fill="#7d9648"/>
-                <g class="loader-woman" fill="#ffffff">
-                    <circle cx="90" cy="70" r="10"/>
-                    <path d="M80,80 L100,80 L110,110 L70,110 Z"/>
-                    <ellipse cx="140" cy="85" rx="22" ry="16" fill="#7d9648"/>
-                    <rect x="110" y="78" width="30" height="10" fill="#7d9648"/>
-                </g>
-            </svg>
-        </div>
-    </div>
 
     <!-- Header -->
     <nav class="navbar">
@@ -112,7 +116,7 @@
             <div class="cat-img-container">
                 <img src="assets/images/flour.jpg" alt="Rasoi Ka Saman" onerror="this.src='https://placehold.co/300x300?text=Flour'">
             </div>
-            <a href="home.html" class="cat-btn">RASOI KA SAMAN</a>
+            <button class="cat-btn">RASOI KA SAMAN</button>
             <p>fulfill your kitchen (Rasoi) with our safe clean and healthy product's</p>
         </div>
         <div class="category-card" data-aos="fade-up" data-aos-delay="100">
@@ -120,7 +124,7 @@
             <div class="cat-img-container">
                 <img src="assets/images/tea.jpg" alt="Health Care" onerror="this.src='https://placehold.co/300x300?text=Green+Tea'">
             </div>
-            <a href="health.html" class="cat-btn">HEALTH FREE</a>
+            <button class="cat-btn">HEALTH FREE</button>
             <p>ENJOY every food with any limits and thinks about your health</p>
         </div>
         <div class="category-card" data-aos="fade-up" data-aos-delay="200">
@@ -128,7 +132,7 @@
             <div class="cat-img-container">
                 <img src="assets/images/snacka.jpg" alt="Snacks" onerror="this.src='https://placehold.co/300x300?text=Snacks'">
             </div>
-            <a href="chatar-patar.html" class="cat-btn">SNACKS</a>
+            <button class="cat-btn">SNACKS</button>
             <p>Bring your healthy and tasty snacks(Chatar-Patar)</p>
         </div>
     </section>
@@ -147,30 +151,36 @@
         </div>
     </section>
 
-    <!-- top product -->
-<section class="top-products">
-    <h2 data-aos="fade-down">OUR TOP PRODUCTS</h2>
-    
-    <div class="top-tabs" data-aos="fade-up">
-        <button class="top-tab active" data-prod="oil">Pidantar Oil</button>
-        <button class="top-tab" data-prod="kemomile">Kemomile</button>
-        <button class="top-tab" data-prod="alsi">Alsi</button>
-    </div>
-
-    <div class="top-content-tray" data-aos="fade-up">
-        <div class="product-tray">
-            <div class="img-box"><img id="img1" src="assets/images/kemomile.jpg" onerror="this.src='https://placehold.co/300x300?text=Image1'"></div>
-            <div class="img-box"><img id="img2" src="assets/images/w2.jpg" onerror="this.src='https://placehold.co/300x300?text=Image2'"></div>
-            <div class="img-box"><img id="img3" src="assets/images/w3.jpg" onerror="this.src='https://placehold.co/300x300?text=Image3'"></div>
+    <!-- Top Products -->
+    <section class="top-products">
+        <h2 data-aos="fade-down">OUR TOP PRODUCTS</h2>
+        <div class="products-grid">
+            <div class="product-item" data-aos="flip-left">
+                <div class="prod-img">
+                    <img src="images/oil.jpg" alt="Pidantar Oil" onerror="this.src='https://placehold.co/200x200?text=Oil'">
+                </div>
+                <h4>PIDANTAR OIL</h4>
+            </div>
+            <div class="product-item" data-aos="flip-left" data-aos-delay="100">
+                <div class="prod-img">
+                    <img src="images/chamomile.jpg" alt="Kemomile" onerror="this.src='https://placehold.co/200x200?text=Kemomile'">
+                </div>
+                <h4>KEMOMILE</h4>
+            </div>
+            <div class="product-item" data-aos="flip-left" data-aos-delay="200">
+                <div class="prod-img">
+                    <img src="assets/images/kemomile.jpg" alt="Alsi" onerror="this.src='https://placehold.co/200x200?text=Alsi'">
+                </div>
+                <h4>ALSI</h4>
+            </div>
+            <div class="product-item" data-aos="flip-left" data-aos-delay="300">
+                <div class="prod-img">
+                    <img src="images/rosemary.jpg" alt="Rosemarie" onerror="this.src='https://placehold.co/200x200?text=Rosemarie'">
+                </div>
+                <h4>ROSEMARIE</h4>
+            </div>
         </div>
-
-        <div class="tray-description">
-            <h3 id="prodTitle">Pidantar Oil</h3>
-            <p id="prodDesc">A soothing oil crafted for relief and daily wellness.</p>
-            <p id="prodUse">Use a few drops to massage affected areas in the morning and evening.</p>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- AI Assistant Button -->
     <div class="ai-assistant">
@@ -194,52 +204,43 @@
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">◇ Phadizon</a>
+          <p>Essence of Himalayas</p>
+        </div>
+
+        <div class="footer-links">
+          <h4>Quick links</h4>
+          <ul>
+            <li><a href="terms.html">Terms &amp; Services</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-social">
+          <h4>Follow us</h4>
+          <a href="https://www.facebook.com/profile.php?id=61585513685094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/phadizon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/phadizon-0608983a2/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@phadizon" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 Phadizon. Made with ❤️ in Devbhoomi. Credits: Local artisans & contributors.</p>
+      </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({
             duration: 1000,
             once: true
-        });
-    </script>
-    <script>
-        const dataMap = {
-            oil: {
-                title: 'Pidantar Oil',
-                desc: 'A soothing oil crafted for relief and daily wellness.',
-                use: 'Use a few drops to massage affected areas in the morning and evening.',
-                images: ['images/oil.jpg', 'assets/images/w1.jpg', 'assets/images/w2.jpg']
-            },
-            kemomile: {
-                title: 'Kemomile',
-                desc: 'Herbal blend for calming routine and relaxation.',
-                use: 'Brew with hot water for 3-5 minutes and enjoy before sleep.',
-                images: ['images/chamomile.jpg', 'assets/images/kemomile.jpg', 'assets/images/w3.jpg']
-            },
-            alsi: {
-                title: 'Alsi',
-                desc: 'Nutrient-rich seeds to add fiber to your diet.',
-                use: 'Sprinkle on salads or mix into morning smoothies.',
-                images: ['assets/images/kemomile.jpg', 'assets/images/w2.jpg', 'assets/images/w3.jpg']
-            }
-        };
-        const tabs = document.querySelectorAll('.top-tab');
-        function setTopProduct(key) {
-            const d = dataMap[key];
-            if (!d) return;
-            document.getElementById('prodTitle').innerText = d.title;
-            document.getElementById('prodDesc').innerText = d.desc;
-            document.getElementById('prodUse').innerText = d.use;
-            document.getElementById('img1').src = d.images[0];
-            document.getElementById('img2').src = d.images[1];
-            document.getElementById('img3').src = d.images[2];
-        }
-        tabs.forEach(b => {
-            b.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                b.classList.add('active');
-                setTopProduct(b.getAttribute('data-prod'));
-            });
         });
     </script>
     <script src="js/main.js"></script>
