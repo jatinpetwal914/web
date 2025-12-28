@@ -168,6 +168,8 @@
                     // Use fallback data if API returns empty
                     allProducts = getFallbackData();
                 }
+                // Remove products without usable images from shop listing
+                allProducts = allProducts.filter(p => p.image && p.image.toString().trim() && !p.image.toString().includes('null') && !p.image.toString().includes('placehold.co'));
                 // expose for other scripts (hero quick-add, main.js helpers)
                 window.allProducts = allProducts;
             } catch (error) {
@@ -192,8 +194,11 @@
         function getFallbackData() {
             return [
                 { id: 1, name: "Chakkidari Flour", price: 450, image: "assets/images/flour.jpg" },
-                { id: 2, name: "Green Tea", price: 350, image: "assets/images/tea.jpg" },
+                { id: 2, name: "Green Tea", price: 350, image: "assets/images/tea.png" },
                 { id: 3, name: "Pidantar Oil", price: 500, image: "assets/images/oil.jpg" },
+                { id: 12, name: "Methi Dana", price: 95, image: "../Methi%20dana.png" },
+                { id: 13, name: "Sesama", price: 120, image: "../Sesama.png" },
+                { id: 14, name: "Pahadi Rajma", price: 180, image: "../Pahadi%20Rajma.png" },
                 { id: 4, name: "Kemomile", price: 300, image: "assets/images/kemomile.jpg" },
                 { id: 5, name: "Alsi", price: 200, image: "assets/images/alsi.jpg" },
                 { id: 6, name: "Rosemarie", price: 400, image: "assets/images/rosemary.jpg" },
@@ -209,8 +214,10 @@
             const productList = document.getElementById('productList');
             productList.innerHTML = '';
             
-            if (products.length > 0) {
-                products.forEach((p, index) => {
+            // defensive: ensure products have images before rendering so display remains consistent
+            const visibleProducts = (products || []).filter(p => p && p.image && p.image.toString().trim() && !p.image.toString().includes('null') && !p.image.toString().includes('placehold.co'));
+            if (visibleProducts.length > 0) {
+                visibleProducts.forEach((p, index) => {
                     productList.innerHTML += `
                         <div class="product-card-full" data-aos="fade-up" data-aos-delay="${index * 100}" data-product-id="${p.id}" data-product-name="${p.name}" data-product-price="${p.price}" data-product-image="${p.image}">
                             <div class="prod-img-full">

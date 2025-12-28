@@ -73,6 +73,15 @@
             <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p19"></div><div class="name">p19</div></div>
             <div class="card" data-aos="fade-up"><div class="thumb"><img src="https://placehold.co/200x160?text=p20"></div><div class="name">p20</div></div>
         </div>
+        <section style="margin-top:2rem; padding:1.5rem; background: rgba(245,248,243,0.6); border-radius:8px;">
+            <h3 style="color:var(--primary);">How to launch this web app locally</h3>
+            <ol style="margin-top:0.75rem; color:var(--muted);">
+                <li>Install dependencies: <code>npm install</code> in project root.</li>
+                <li>Start the backend server: <code>node backend/server.js</code> (or <code>npm start</code> if configured).</li>
+                <li>Open the frontend: serve the <code>frontend/</code> folder (e.g. <code>npx serve frontend</code>) or open <code>frontend/index.html</code> in a browser.</li>
+                <li>By default API runs on <code>http://localhost:5000</code>; if you run the frontend through a static server, the pages will call that API.</li>
+            </ol>
+        </section>
     </section>
     <div class="floating-search">
         <button id="side-search-btn" onclick="openSearch()" title="Search">

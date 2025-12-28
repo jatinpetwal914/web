@@ -54,7 +54,7 @@ CREATE TABLE order_items (
 -- Seed Data
 INSERT INTO products (name, description, price, image, category) VALUES
 ('Chakkidari Flour', 'Fresh Rasoi Ka Saman from Himalayas', 450.00, 'images/flour.jpg', 'Home'),
-('Green Tea', 'Organic Green Tea for Health Care', 350.00, 'images/tea.jpg', 'Health-Care'),
+('Green Tea', 'Organic Green Tea for Health Care', 350.00, 'images/tea.png', 'Health-Care'),
 ('Snacks Pack', 'Tasty Chatar-Patar from Hills', 150.00, 'images/snacks.jpg', 'Snacks'),
 ('Pidantar Oil', 'Relief Oil', 200.00, 'images/oil.jpg', 'Top-Products'),
 ('Kemomile', 'Chamomile Flowers', 300.00, 'images/chamomile.jpg', 'Top-Products'),

@@ -179,9 +179,12 @@ const token = localStorage.getItem('token');
                         total += (item.price * item.quantity);
                         cartContainer.innerHTML += `
                             <div class="cart-item">
-                                <div>
-                                    <h3>${item.name}</h3>
-                                    <p>Quantity: ${item.quantity}</p>
+                                <div style="display:flex; align-items:center; gap:1rem;">
+                                    <img src="${item.image || 'https://placehold.co/80x80?text=Img'}" alt="${item.name}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;">
+                                    <div>
+                                        <h3>${item.name}</h3>
+                                        <p>Quantity: ${item.quantity}</p>
+                                    </div>
                                 </div>
                                 <div style="text-align: right;">
                                     <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
@@ -212,9 +215,12 @@ const token = localStorage.getItem('token');
                     total += (item.price * item.quantity);
                     cartContainer.innerHTML += `
                         <div class="cart-item">
-                            <div>
-                                <h3>${item.name}</h3>
-                                <p>Quantity: ${item.quantity}</p>
+                            <div style="display:flex; align-items:center; gap:1rem;">
+                                <img src="${item.image || 'https://placehold.co/80x80?text=Img'}" alt="${item.name}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;">
+                                <div>
+                                    <h3>${item.name}</h3>
+                                    <p>Quantity: ${item.quantity}</p>
+                                </div>
                             </div>
                             <div style="text-align: right;">
                                 <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
