@@ -15,7 +15,14 @@ if (registerForm) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password })
             });
-            const data = await res.json();
+            let data;
+            try {
+                data = await res.json();
+            } catch (e) {
+                // Not JSON response, read as text
+                const text = await res.text().catch(() => null);
+                data = { message: text };
+            }
             if (res.ok) {
                 alert('Registration successful! Please login.');
                 window.location.href = 'login.html';

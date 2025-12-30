@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: phadizon
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/phadizon.sql:/docker-entrypoint-initdb.d/phadizon.sql:ro
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data: {}
