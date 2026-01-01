@@ -13,7 +13,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 65vh;
+            padding: 3rem 0;
             position: relative;
             overflow: hidden;
         }
@@ -196,7 +197,14 @@
     </div>
 
     <script src="js/main.js"></script>
-    <script src="js/auth.js"></script>
+
+    <!-- Firebase SDKs (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <!-- Firebase auth logic for this page -->
+    <script src="js/firebase-auth.js"></script>
 
     <footer class="site-footer" role="contentinfo" aria-label="Site footer">
         <div class="footer-inner">

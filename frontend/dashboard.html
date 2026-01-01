@@ -177,20 +177,25 @@
     <script>AOS.init();</script>
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+
+    <!-- Firebase SDKs (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-auth.js"></script>
+
     <script>
         // Check auth
-        const token = localStorage.getItem('token');
-        if (!token) {
+        const userStr = localStorage.getItem('user');
+        if (!userStr) {
             window.location.href = 'login.html';
-        }
-
-        // Mock User Data
-        // In real app, fetch from /api/user/profile
-        document.getElementById('userName').innerText = "Hello, Pahadi Lover!";
-
-        function logout() {
-            localStorage.removeItem('token');
-            window.location.href = 'index.html';
+        } else {
+            const user = JSON.parse(userStr);
+            if(user.displayName) {
+                document.getElementById('userName').innerText = "Hello, " + user.displayName + "!";
+            } else if(user.email) {
+                 document.getElementById('userName').innerText = "Hello, " + user.email.split('@')[0] + "!";
+            }
         }
     </script>
 

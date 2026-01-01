@@ -79,72 +79,133 @@
       </div>
     </nav>
 
-    <!-- hero -->
-    <section class="hero" aria-label="Hero section">
-      <!-- Background image used by CSS: copy your file to `assets/images/chatgpt-hero.png` -->
-      <div class="hero-content" data-aos="fade-up">
-        <h1 class="hero-quote">Bringing goodness of the Himalayas to you</h1>
-        <p class="hero-subtext">
-          Authentic, sustainable, and handcrafted products from our mountain
-          communities.
-        </p>
-        <div class="hero-actions">
-          <a href="products.html" class="cta-btn-modern">Shop Now</a>
-        </div>
-        <!-- Placeholder for future small product thumbnails inside hero (hidden by default) -->
-        <div class="hero-features" aria-hidden="true"></div>
-        <!-- New product: Alovera Soap added to shop (id: 11) -->
-        <!-- Image stored at assets/images/alovera-soap.png -->
-      </div>
-    </section>
-
-    <!-- wearable -->
-    <section class="wearable-section">
-      <div class="section-header" data-aos="fade-down">
-        <h2>WEARABLE</h2>
-        <p>Phadi Tradition</p>
-      </div>
-
-      <div class="wearable-scroll-container">
-        <div class="wearable-grid">
-          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="100">
-            <div class="img-placeholder">
-              <img src="assets/images/w1.jpg" alt="Phadi Wearable 1" />
+    <!-- hero (carousel) -->
+    <section class="hero-carousel" aria-label="Hero carousel">
+      <div class="carousel" id="heroCarousel" data-interval="5000">
+        <div class="slide active" style="background-image: url('assets/images/chatgpt-hero.png')">
+          <div class="slide-inner">
+            <div class="slide-top"></div>
+            <div class="slide-center">
+              <h1>Bringing goodness of the Himalayas to you</h1>
+              <p>Authentic, sustainable, and handcrafted products from our mountain communities.</p>
             </div>
-          </div>
-
-          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="200">
-            <div class="img-placeholder">
-              <img src="assets/images/w2.jpg" alt="Phadi Wearable 2" />
-            </div>
-          </div>
-
-          <div class="wearable-card center-card" data-aos="zoom-in">
-            <div class="img-placeholder">
-              <img src="assets/images/w3.jpg" alt="Phadi Wearable 3" />
-            </div>
-          </div>
-
-          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="300">
-            <div class="img-placeholder">
-              <img src="assets/images/w4.jpg" alt="Phadi Wearable 4" />
-            </div>
-          </div>
-
-          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="400">
-            <div class="img-placeholder">
-              <img src="assets/images/w5.jpg" alt="Phadi Wearable 5" />
-            </div>
-          </div>
-
-          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="500">
-            <div class="img-placeholder">
-              <img src="assets/images/w6.jpg" alt="Phadi Wearable 6" />
+            <div class="slide-bottom">
+              <a href="products.html" class="cta-btn-modern slide-cta">Shop Now</a>
             </div>
           </div>
         </div>
+
+        <div class="slide" style="background-image: url('assets/images/ragi%20benifits.png')">
+          <div class="slide-inner">
+            <div class="slide-top"></div>
+            <div class="slide-center">
+              <h1>Ragi — nutritious, naturally sourced</h1>
+              <p>Wholesome grains straight from mountain farms.</p>
+            </div>
+            <div class="slide-bottom">
+              <a href="products.html" class="cta-btn-modern slide-cta">Shop Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide" style="background-image: url('assets/images/p11.jpeg')">
+          <div class="slide-inner">
+            <div class="slide-top"></div>
+            <div class="slide-center">
+              <h1>Jahangora — ancient Himalayan grain</h1>
+              <p>Traditional taste, modern goodness.</p>
+            </div>
+            <div class="slide-bottom">
+              <a href="products.html" class="cta-btn-modern slide-cta">Shop Now</a>
+            </div>
+          </div>
+        </div>
+
+         <div class="slide" style="background-image: url('assets/images/jahngora\ benifits.png')">
+          <div class="slide-inner">
+            <div class="slide-top"></div>
+            <div class="slide-center">
+              <h1>pulses — ancient organic himalayas pulses</h1>
+              <p>Traditional taste, modern goodness.</p>
+            </div>
+            <div class="slide-bottom">
+              <a href="products.html" class="cta-btn-modern slide-cta">Shop Now</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel-indicators" aria-hidden="true">
+          <button class="indicator active" data-slide="0" aria-label="Slide 1"></button>
+          <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
+          <button class="indicator" data-slide="2" aria-label="Slide 3"></button>
+        </div>
       </div>
+
+      <style>
+        /* Hero carousel styling */
+        .hero-carousel { margin-top: 1rem; }
+        .carousel { position: relative; width: 100%; height: 65vh; min-height: 480px; max-height: 900px; overflow: hidden; border-radius: 12px; box-shadow: 0 18px 50px rgba(14,20,10,0.08); }
+        .carousel .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 700ms ease; display: flex; }
+        .carousel .slide.active { opacity: 1; z-index: 2; }
+        .slide-inner { width: 100%; display: flex; flex-direction: column; justify-content: space-between; color: #fff; padding: 3rem; background: linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.25)); }
+        .slide-center { text-align: left; max-width: 900px; }
+        .slide-center h1 { font-size: clamp(1.8rem, 3.6vw, 3.6rem); margin: 0 0 0.5rem; letter-spacing: -0.5px; }
+        .slide-center p { margin: 0 0 0.75rem; opacity: 0.95; }
+        .slide-bottom { display: flex; justify-content: center; }
+        .slide-cta { margin-top: 0.5rem; align-self: center; }
+        .carousel-indicators { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5; }
+        .carousel-indicators .indicator { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.45); border: none; cursor: pointer; }
+        .carousel-indicators .indicator.active { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+        @media (max-width: 1100px) {
+          .carousel { height: 58vh; min-height: 420px; }
+        }
+        @media (max-width: 760px) {
+          .carousel { height: 56vh; min-height: 360px; }
+          .slide-center h1 { font-size: 1.6rem; }
+          .slide-inner { padding: 1.5rem; }
+          .slide-bottom { justify-content: center; }
+          .slide-center { text-align: center; }
+        }
+      </style>
+
+      <script>
+        (function () {
+          const carousel = document.getElementById('heroCarousel');
+          if (!carousel) return;
+          const slides = Array.from(carousel.querySelectorAll('.slide'));
+          const indicators = Array.from(carousel.querySelectorAll('.indicator'));
+          let current = 0;
+          const interval = parseInt(carousel.dataset.interval, 10) || 5000;
+          let timer = setInterval(next, interval);
+
+          function show(i) {
+            slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+            indicators.forEach((b, idx) => b.classList.toggle('active', idx === i));
+          }
+
+          function next() {
+            current = (current + 1) % slides.length;
+            show(current);
+          }
+
+          indicators.forEach((btn) => {
+            btn.addEventListener('click', () => {
+              const i = parseInt(btn.dataset.slide, 10) || 0;
+              current = i;
+              show(current);
+              clearInterval(timer);
+              timer = setInterval(next, interval);
+            });
+          });
+
+          carousel.addEventListener('mouseenter', () => clearInterval(timer));
+          carousel.addEventListener('mouseleave', () => (timer = setInterval(next, interval)));
+          window.addEventListener('resize', () => show(current));
+        })();
+      </script>
     </section>
+
 
     <!-- Categories Section -->
     <section class="categories-section">
@@ -215,11 +276,7 @@
     <section class="top-products">
       <h2 data-aos="fade-down">OUR TOP PRODUCTS</h2>
 
-      <div class="top-tabs" data-aos="fade-up">
-        <button class="top-tab active" data-prod="oil">Pidantar Oil</button>
-        <button class="top-tab" data-prod="kemomile">Kemomile</button>
-        <button class="top-tab" data-prod="alsi">Alsi</button>
-      </div>
+
 
       <div class="top-content-tray" data-aos="fade-up">
         <style>
@@ -227,11 +284,11 @@
           .top-carousel {
             position: relative;
             overflow: hidden;
-            padding: 0.5rem 0;
+            padding: 1rem 0;
           }
           .carousel-track {
             display: flex;
-            gap: 1rem;
+            gap: 1.25rem;
             transition: transform 600ms cubic-bezier(0.22, 0.9, 0.22, 1);
             will-change: transform;
           }
@@ -246,8 +303,9 @@
           }
           .carousel-item img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
+            height: 360px;
+            object-fit: contain;
+            background: #fff;
             display: block;
           }
           .carousel-item .caption {
@@ -264,11 +322,13 @@
             .carousel-item {
               flex: 0 0 calc(50% - 0.5rem);
             }
+            .carousel-item img { height: 300px; }
           }
           @media (max-width: 640px) {
             .carousel-item {
               flex: 0 0 calc(100% - 0.5rem);
             }
+            .carousel-item img { height: 240px; }
           }
         </style>
 
@@ -325,64 +385,7 @@
         once: true,
       });
     </script>
-    <script>
-      const dataMap = {
-        oil: {
-          title: "Pidantar Oil",
-          desc: "A soothing oil crafted for relief and daily wellness.",
-          use: "Use a few drops to massage affected areas in the morning and evening.",
-          images: [
-            "assets/images/oil.jpg",
-            "assets/images/w1.jpg",
-            "assets/images/w2.jpg",
-          ],
-        },
-        kemomile: {
-          title: "Kemomile",
-          desc: "Herbal blend for calming routine and relaxation.",
-          use: "Brew with hot water for 3-5 minutes and enjoy before sleep.",
-          images: [
-            "assets/images/kemomile.jpg",
-            "assets/images/kemomile.jpg",
-            "assets/images/w3.jpg",
-          ],
-        },
-        alsi: {
-          title: "Alsi",
-          desc: "Nutrient-rich seeds to add fiber to your diet.",
-          use: "Sprinkle on salads or mix into morning smoothies.",
-          images: [
-            "assets/images/kemomile.jpg",
-            "assets/images/w2.jpg",
-            "assets/images/w3.jpg",
-          ],
-        },
-      };
-      const tabs = document.querySelectorAll(".top-tab");
-      function setTopProduct(key) {
-        const d = dataMap[key];
-        if (!d) return;
-        const prodTitle = document.getElementById("prodTitle");
-        if (prodTitle) prodTitle.innerText = d.title;
-        const prodDesc = document.getElementById("prodDesc");
-        if (prodDesc) prodDesc.innerText = d.desc;
-        const prodUse = document.getElementById("prodUse");
-        if (prodUse) prodUse.innerText = d.use;
-        const i1 = document.getElementById("img1");
-        if (i1) i1.src = d.images[0];
-        const i2 = document.getElementById("img2");
-        if (i2) i2.src = d.images[1];
-        const i3 = document.getElementById("img3");
-        if (i3) i3.src = d.images[2];
-      }
-      tabs.forEach((b) => {
-        b.addEventListener("click", () => {
-          tabs.forEach((t) => t.classList.remove("active"));
-          b.classList.add("active");
-          setTopProduct(b.getAttribute("data-prod"));
-        });
-      });
-    </script>
+
     <script>
       (function () {
         const fallback = [
@@ -609,8 +612,64 @@
         document.addEventListener("DOMContentLoaded", initTopCarousel);
       })();
     </script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/config.example.js"></script>
+    <script src="js/cart.js"></script>
+
+    <!-- wearable (moved here) -->
+    <section class="wearable-section">
+      <div class="section-header" data-aos="fade-down">
+        <h2>WEARABLE</h2>
+        <p>Phadi Tradition</p>
+      </div>
+
+      <div class="wearable-scroll-container">
+        <div class="wearable-grid">
+          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="img-placeholder">
+              <img src="assets/images/w1.jpg" alt="Phadi Wearable 1" />
+            </div>
+          </div>
+
+          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="img-placeholder">
+              <img src="assets/images/w2.jpg" alt="Phadi Wearable 2" />
+            </div>
+          </div>
+
+          <div class="wearable-card center-card" data-aos="zoom-in">
+            <div class="img-placeholder">
+              <img src="assets/images/w3.jpg" alt="Phadi Wearable 3" />
+            </div>
+          </div>
+
+          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="img-placeholder">
+              <img src="assets/images/w4.jpg" alt="Phadi Wearable 4" />
+            </div>
+          </div>
+
+          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="400">
+            <div class="img-placeholder">
+              <img src="assets/images/w5.jpg" alt="Phadi Wearable 5" />
+            </div>
+          </div>
+
+          <div class="wearable-card" data-aos="zoom-in" data-aos-delay="500">
+            <div class="img-placeholder">
+              <img src="assets/images/w6.jpg" alt="Phadi Wearable 6" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer class="site-footer" role="contentinfo" aria-label="Site footer">
       <div class="footer-inner">

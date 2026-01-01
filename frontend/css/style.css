@@ -264,7 +264,7 @@ html { scroll-behavior: smooth; }
     background-repeat: no-repeat;
     /* Preserve original aspect ratio and avoid vertical stretching */
     background-size: cover;
-    height: 75vh;
+    height: 200vh;
     display: flex;
     align-items: center;
     justify-content: center;

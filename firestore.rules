@@ -1,0 +1,59 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users - only the user may read/write their profile
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Products - public reads only, admin writes
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // Carts - each user owns their cart document and items
+    // Top-level cart doc stores summary (totalAmount, currency)
+    match /carts/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /items/{itemId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+
+        allow create: if request.auth != null
+          && request.auth.uid == userId
+          && request.resource.data.productId is string
+          && request.resource.data.name is string
+          && request.resource.data.price is number
+          && request.resource.data.quantity is int
+          && request.resource.data.quantity > 0;
+
+        allow update: if request.auth != null
+          && request.auth.uid == userId
+          && (request.resource.data.quantity is int && request.resource.data.quantity >= 0);
+
+        allow delete: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Orders - users can create orders only for themselves; admins may read all
+    match /orders/{orderId} {
+      allow create: if request.auth != null
+        && request.auth.uid == request.resource.data.userId
+        && request.resource.data.totalAmount is number
+        && request.resource.data.totalAmount > 0
+        && request.resource.data.paymentIntentId is string;
+
+      allow read: if request.auth != null && (
+        resource.data.userId == request.auth.uid
+        || get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+      );
+
+      // no client updates to order documents
+      allow update, delete: if false;
+    }
+
+    // Deny anything else by default
+  }
+}

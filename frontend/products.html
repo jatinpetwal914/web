@@ -150,9 +150,19 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/config.example.js"></script>
+    <script src="js/cart.js"></script>
     <script>
+        // products page uses local product data; addToCart will delegate to `window.addToCart` (Firestore if user is signed in)
         const API_BASE = 'http://localhost:5000/api';
         let allProducts = [];
 
@@ -206,7 +216,28 @@
                 { id: 8, name: "Pahadi Salt (Namak)", price: 90, image: "assets/images/pahadi-salt.png" },
                 { id: 9, name: "Wild Honey", price: 420, image: "assets/images/honey.png" },
                 { id: 10, name: "Haldi (Turmeric) Soap", price: 120, image: "assets/images/haldi-soap.png" },
-                { id: 11, name: "Alovera Soap", price: 140, image: "assets/images/alovera-soap.png" }
+                { id: 11, name: "Alovera Soap", price: 140, image: "assets/images/alovera-soap.png" },
+                // Health products (from health page)
+                { id: 101, name: "Health p1", price: 180, image: "assets/images/p1.png" },
+                { id: 102, name: "Health p2", price: 210, image: "assets/images/p2.png" },
+                { id: 103, name: "Health p3", price: 190, image: "assets/images/p3.png" },
+                { id: 104, name: "Health p4", price: 230, image: "assets/images/p4.png" },
+                { id: 105, name: "Health p5", price: 160, image: "assets/images/p5.png" },
+                { id: 106, name: "Health p6", price: 175, image: "assets/images/p6.png" },
+                { id: 107, name: "Health p7", price: 200, image: "assets/images/p7.png" },
+                { id: 108, name: "Health p8", price: 145, image: "assets/images/p8.png" },
+                { id: 109, name: "Health p9", price: 150, image: "assets/images/p9.png" },
+                { id: 110, name: "Health p10", price: 190, image: "https://placehold.co/200x160?text=p10" },
+                { id: 111, name: "Health p11", price: 185, image: "https://placehold.co/200x160?text=p11" },
+                { id: 112, name: "Health p12", price: 170, image: "https://placehold.co/200x160?text=p12" },
+                { id: 113, name: "Health p13", price: 195, image: "https://placehold.co/200x160?text=p13" },
+                { id: 114, name: "Health p14", price: 210, image: "https://placehold.co/200x160?text=p14" },
+                { id: 115, name: "Health p15", price: 205, image: "https://placehold.co/200x160?text=p15" },
+                { id: 116, name: "Health p16", price: 220, image: "https://placehold.co/200x160?text=p16" },
+                { id: 117, name: "Health p17", price: 230, image: "https://placehold.co/200x160?text=p17" },
+                { id: 118, name: "Health p18", price: 240, image: "https://placehold.co/200x160?text=p18" },
+                { id: 119, name: "Health p19", price: 250, image: "https://placehold.co/200x160?text=p19" },
+                { id: 120, name: "Health p20", price: 260, image: "https://placehold.co/200x160?text=p20" }
             ];
         }
 

@@ -142,142 +142,30 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init();</script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-functions-compat.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
     <script src="js/main.js"></script>
     <script src="js/ai.js"></script>
-    <script>
-        const API_BASE = 'http://localhost:5000/api';
+    <script src="js/firebase-auth.js"></script>
+    <script src="js/config.example.js"></script>
+    <script src="js/cart.js"></script>
 
-        async function loadCart() {
-
-
-const token = localStorage.getItem('token');
-            // If no auth token, fall back to localStorage-based cart for guest users
-            if (!token) {
-                const localCart = JSON.parse(localStorage.getItem('cart') || '[]');
-                renderCartFromLocal(localCart);
-                return;
-            }
-
-            try {
-                const res = await fetch(`${API_BASE}/cart`, {
-                    headers: { 'Authorization': token } // Backend needs to verify token, for now just passing it
-                });
-                // Mocking response for now as backend auth middleware might not be fully wired in previous turn
-                // Assuming the backend returns an array of items
-                // If backend is not ready, we will show empty or mock
-                
-                // For demonstration, let's assume we get data or handle error
-                const data = await res.json();
-                
-                const cartContainer = document.getElementById('cartItems');
-                const cartSummary = document.getElementById('cartSummary');
-                
-                if (Array.isArray(data) && data.length > 0) {
-                    cartContainer.innerHTML = '';
-                    let total = 0;
-                    data.forEach(item => {
-                        total += (item.price * item.quantity);
-                        cartContainer.innerHTML += `
-                            <div class="cart-item">
-                                <div style="display:flex; align-items:center; gap:1rem;">
-                                    <img src="${item.image || 'https://placehold.co/80x80?text=Img'}" alt="${item.name}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;">
-                                    <div>
-                                        <h3>${item.name}</h3>
-                                        <p>Quantity: ${item.quantity}</p>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
-                                    <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('cartTotal').innerText = '₹' + total;
-                    cartSummary.style.display = 'block';
-                } else {
-                    cartContainer.innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
-                    cartSummary.style.display = 'none';
-                }
-            } catch (error) {
-                console.error(error);
-                document.getElementById('cartItems').innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
-            }
-        }
-
-        function renderCartFromLocal(localCart) {
-            const cartContainer = document.getElementById('cartItems');
-            const cartSummary = document.getElementById('cartSummary');
-            if (Array.isArray(localCart) && localCart.length > 0) {
-                cartContainer.innerHTML = '';
-                let total = 0;
-                localCart.forEach(item => {
-                    total += (item.price * item.quantity);
-                    cartContainer.innerHTML += `
-                        <div class="cart-item">
-                            <div style="display:flex; align-items:center; gap:1rem;">
-                                <img src="${item.image || 'https://placehold.co/80x80?text=Img'}" alt="${item.name}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;">
-                                <div>
-                                    <h3>${item.name}</h3>
-                                    <p>Quantity: ${item.quantity}</p>
-                                </div>
-                            </div>
-                            <div style="text-align: right;">
-                                <p style="font-size: 1.2rem;">₹${item.price * item.quantity}</p>
-                                <button class="remove-btn" onclick="removeItem(${item.id})">Remove</button>
-                            </div>
-                        </div>
-                    `;
-                });
-                document.getElementById('cartTotal').innerText = '₹' + total;
-                cartSummary.style.display = 'block';
-            } else {
-                cartContainer.innerHTML = '<p style="text-align: center;">Your cart is empty.</p>';
-                cartSummary.style.display = 'none';
-            }
-        }
-
-        async function removeItem(id) {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                // remove from localStorage cart
-                let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                cart = cart.filter(i => i.id !== id);
-                localStorage.setItem('cart', JSON.stringify(cart));
-                renderCartFromLocal(cart);
-                // update badge if main.js helper exists
-                if (typeof updateCartBadge === 'function') updateCartBadge();
-                return;
-            }
-            try {
-                const res = await fetch(`${API_BASE}/cart/${id}`, { method: 'DELETE', headers: { Authorization: token } });
-                if (res.ok) {
-                    await loadCart();
-                    if (typeof updateCartBadge === 'function') updateCartBadge();
-                } else {
-                    alert('Could not remove item');
-                }
-            } catch (e) { console.error(e); alert('Could not remove item'); }
-        }
-
-        async function placeOrder() {
-            const token = localStorage.getItem('token');
-            if (!token) { alert('Please login to place order'); window.location.href = 'login.html'; return; }
-            try {
-                const res = await fetch(`${API_BASE}/orders/place`, { method: 'POST', headers: { Authorization: token } });
-                if (res.ok) {
-                    const data = await res.json();
-                    alert('Order placed. Total: ₹' + (data.total || '0'));
-                    window.location.href = 'orders.html';
-                } else {
-                    alert('Could not place order');
-                }
-            } catch (e) { console.error(e); alert('Could not place order'); }
-        }
-
-        loadCart();
-    </script>
-
+    <!-- Checkout Modal for Stripe Elements -->
+    <div id="checkoutModal" class="checkout-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); align-items:center; justify-content:center; z-index:1200;">
+        <div style="background:#fff; padding:20px; width:420px; border-radius:12px;"> 
+            <h3 style="margin-top:0;">Checkout</h3>
+            <div id="card-errors" role="alert" style="color:#b00020; margin-bottom:8px;"></div>
+            <div id="card-element" style="margin-bottom:12px;"></div>
+            <div style="text-align:right;">
+                <button id="cancelCheckout" class="remove-btn" style="background:#aaa; margin-right:8px;">Cancel</button>
+                <button id="confirmCheckout" class="checkout-btn">Pay</button>
+            </div>
+        </div>
+    </div>
     <footer class="site-footer" role="contentinfo" aria-label="Site footer">
         <div class="footer-inner">
             <div class="footer-about">

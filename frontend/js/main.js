@@ -99,8 +99,25 @@ function handleSearch(query) {
 function getCart() { return JSON.parse(localStorage.getItem('cart')||'[]'); }
 function saveCart(cart) { localStorage.setItem('cart', JSON.stringify(cart)); updateCartBadge(); }
 async function updateCartBadge(){
-    const token = localStorage.getItem('token');
     const cartLink = document.querySelector('a[href="cart.html"]');
+
+    // Prefer Firestore cart when user is signed in
+    try {
+        if (window.auth && auth.currentUser && window.db) {
+            const uid = auth.currentUser.uid;
+            const snap = await db.collection('carts').doc(uid).collection('items').get();
+            const count = snap.docs.reduce((s,d)=> s + (d.data().quantity||0), 0);
+            if (cartLink) {
+                let badge = cartLink.querySelector('.cart-badge');
+                if (!badge) { badge = document.createElement('span'); badge.className = 'cart-badge'; badge.setAttribute('aria-hidden','true'); badge.style.cssText = 'background:var(--accent-gold); color:#fff; border-radius:999px; padding:2px 8px; margin-left:8px; font-size:0.8rem;'; cartLink.appendChild(badge); }
+                badge.textContent = count; badge.style.display = count ? 'inline-block' : 'none';
+            }
+            return;
+        }
+    } catch(e){ console.error(e); }
+
+    // fallback to legacy token-based backend API
+    const token = localStorage.getItem('token');
     if (token) {
         try {
             const res = await fetch('http://localhost:5000/api/cart', { headers: { Authorization: token } });
@@ -116,6 +133,7 @@ async function updateCartBadge(){
             }
         } catch(e){ console.error(e); }
     }
+
     // fallback to localStorage cart badge
     const cart = getCart();
     const count = cart.reduce((s,i)=>s + (i.quantity||0), 0);
