@@ -265,32 +265,69 @@ async function handleLogin(e) {
 // Handle common sign-in finalization steps for a user object
 async function handleSignInResult(user) {
     if (!user) return;
+
+    // Ensure a fresh ID token is available so Firestore security rules see the user as authenticated
     try {
-        const userRef = db.collection('users').doc(user.uid);
-        const userDoc = await userRef.get();
-        if (!userDoc.exists) {
-            await userRef.set({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName || '',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
-                role: 'user',
-                status: 'active'
-            });
-        } else {
-            await userRef.update({ lastLogin: firebase.firestore.FieldValue.serverTimestamp() }).catch(()=>{});
+        await user.getIdToken(true);
+    } catch (tokenErr) {
+        console.warn('Could not refresh ID token before finalizing sign-in:', tokenErr);
+    }
+
+    // Try Firestore operations with simple retry logic to account for timing propagation issues
+    const userRef = db.collection('users').doc(user.uid);
+    let attempts = 0;
+    const maxAttempts = 3;
+    const baseDelay = 300; // ms
+
+    while (attempts < maxAttempts) {
+        try {
+            attempts++;
+            const userDoc = await userRef.get();
+
+            if (!userDoc.exists) {
+                // Create user document
+                await userRef.set({
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName || '',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastLogin: firebase.firestore.FieldValue.serverTimestamp(),
+                    role: 'user',
+                    status: 'active'
+                });
+            } else {
+                await userRef.update({ lastLogin: firebase.firestore.FieldValue.serverTimestamp() }).catch(()=>{});
+            }
+
+            // Persist token & user info locally
+            const idToken = await user.getIdToken();
+            localStorage.setItem('token', idToken);
+            localStorage.setItem('user', JSON.stringify({ uid: user.uid, email: user.email, displayName: user.displayName }));
+
+            showMessage('Login successful! Redirecting...', false);
+            setTimeout(() => { window.location.href = 'index.html'; }, 900);
+            return;
+        } catch (e) {
+            // If permissions error, retry a few times (firestore auth propagation can lag after redirect sign-in)
+            console.error(`Attempt ${attempts} - Error finalizing sign-in:`, e);
+            if (e && e.code === 'permission-denied' || (e && e.code === 'PERMISSION_DENIED') || (e && e.message && e.message.toLowerCase().includes('permission')) ) {
+                if (attempts < maxAttempts) {
+                    await new Promise(r => setTimeout(r, baseDelay * attempts));
+                    // attempt to refresh token before retry
+                    try { await user.getIdToken(true); } catch (tErr) { /* ignore */ }
+                    continue;
+                }
+
+                // After retries fail, show an actionable error message
+                console.error('Firestore permission denied after retries. This usually means your Firestore security rules are preventing access for this user.');
+                showMessage('Sign-in succeeded but could not create your user profile due to Firestore permissions. Check Firestore rules or Console: ' + firebaseAuthConsoleLink(), true);
+                return;
+            }
+
+            // Other errors - show generic message
+            showMessage('Sign-in succeeded but finalizing user failed. Try reloading or check the console for more details.', true);
+            return;
         }
-
-        const idToken = await user.getIdToken();
-        localStorage.setItem('token', idToken);
-        localStorage.setItem('user', JSON.stringify({ uid: user.uid, email: user.email, displayName: user.displayName }));
-
-        showMessage('Login successful! Redirecting...', false);
-        setTimeout(() => { window.location.href = 'index.html'; }, 900);
-    } catch (e) {
-        console.error('Error finalizing sign-in:', e);
-        showMessage('Sign-in succeeded but finalizing user failed. Try reloading.', true);
     }
 }
 
@@ -314,6 +351,13 @@ async function handleGoogleSignIn(e) {
         return;
     } catch (err) {
         console.warn('Popup sign-in failed, attempting redirect if appropriate:', err);
+
+        // If browser COOP/COEP policies prevented the popup from behaving as expected, inform the user
+        if (err && err.message && err.message.includes('Cross-Origin-Opener-Policy')) {
+            showMessage('Popup sign-in was blocked by your browser security policy (Cross-Origin-Opener-Policy). Try using the redirect method or enable popups for this site.', true);
+            return;
+        }
+
         // Handle known popup errors
         if (err && (err.code === 'auth/popup-blocked' || err.code === 'auth/popup-closed-by-user' || err.code === 'auth/cancelled-popup-request')) {
             // User closed popup; inform and stop

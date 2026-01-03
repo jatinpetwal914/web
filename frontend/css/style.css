@@ -864,38 +864,7 @@ html { scroll-behavior: smooth; }
         margin: 10px 0;
     }
 }
-.loader-overlay {
-    position: fixed;
-    inset: 0;
-    background: #0b0b0b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4000;
-    opacity: 1;
-    transition: opacity 0.4s ease;
-}
-.loader-overlay.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-.loader-figure {
-    width: 220px;
-    height: 220px;
-    position: relative;
-}
-.loader-figure svg {
-    width: 100%;
-    height: 100%;
-}
-.loader-grass {
-    transform-origin: bottom center;
-    animation: grassSway 2s ease-in-out infinite;
-}
-.loader-woman {
-    transform-origin: center;
-    animation: womanBob 1.6s ease-in-out infinite;
-}
+/* loader styles removed */
 .cta-btn.vibrate {
     animation: vibrate 0.9s infinite;
 }

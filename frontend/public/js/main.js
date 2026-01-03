@@ -3,9 +3,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Phadizon Loaded');
 
-    const loader = document.getElementById('loaderOverlay');
-    if (loader) setTimeout(() => loader.classList.add('hidden'), 1200);
-
     // Check for logged-in user
     const user = JSON.parse(localStorage.getItem('user'));
     const userIcon = document.querySelector('.user-icon a');
@@ -209,3 +206,4 @@ function showToast(msg){
 }
 
 document.addEventListener('DOMContentLoaded', updateCartBadge);
+

@@ -1,0 +1,11 @@
+# Netlify configuration
+# Build command and publish directory for a Vite app
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA redirect for client-side routing (also mirrored in _redirects files)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
